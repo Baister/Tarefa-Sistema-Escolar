@@ -25,6 +25,18 @@ public class AlunoDAOImplements implements IAlunoDAO {
         try (Connection conn = sqlConn.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                alunos.add(new Aluno(
+                        rs.getInt("idAluno"),//Representa uma coluna da tabela de aluno, a ID
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getString("email"),
+                        rs.getDate("data_nascimento").toLocalDate(),
+                        rs.getString("telefone")
+                ));
+            }
+
         }catch (SQLException e){
             System.err.print("Erro ao listar os alunos: " + e.getMessage());
         }
