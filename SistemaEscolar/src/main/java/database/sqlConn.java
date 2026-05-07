@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class sqlConn {
     public static final String url = "jdbc:mysql://localhost:3306/sistema_escolar";
     private static final String user = "root";
-    private static final String password = "Senai@123";
+    private static final String password = "Senai@134";
 
     public static Connection getConnection() throws SQLException
     {
@@ -15,7 +15,7 @@ public class sqlConn {
     }
     public static void testeConnection(){
         try (Connection conn = getConnection()){
-            System.out.println("A conexão foi bem sucedida!" + conn);
+            System.out.println("A conexão foi bem sucedida! " + conn);
         }catch (SQLException e){
             System.out.println("Falha na conexão " + e.getMessage());
             System.out.println("Verifique: ");
