@@ -3,6 +3,7 @@ package dao;
 import model.Aluno;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IAlunoDAO {
     //CRUD
@@ -17,4 +18,7 @@ public interface IAlunoDAO {
 
     //Delete
     void excluirAluno(Aluno aluno);
+
+    //BuscarAluno getById
+    Optional<Aluno> buscarPorId(int id);
 }

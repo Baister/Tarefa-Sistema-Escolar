@@ -29,6 +29,7 @@ public class App
             System.out.println("2. Atualizar Aluno;");
             System.out.println("3. Excluir Aluno;");
             System.out.println("4. Listar Alunos;");
+            System.out.println("5. Buscar Aluno;");
             System.out.println("0. Sair do a programa.");
 
             opcao = sc.nextInt();
@@ -57,6 +58,32 @@ public class App
                         }
                     }
                     break;
+
+                case 5:
+                    System.out.println("Buscar Aluno");
+                    System.out.print("Digite o ID aluno: ");
+                    int idBuscado = sc.nextInt();
+
+                    List<Aluno> todosAlunosDois = alunoDaoMethods.listarTodosAlunos();
+                    if(todosAlunosDois.isEmpty()){
+                        System.out.println("Nenhum aluno encontrado!");
+                    }else{
+                        for(Aluno aluno : todosAlunosDois) {
+                            if(aluno.getId() == idBuscado){
+                                Aluno alunoBuscado = aluno;
+                            }else{
+                                System.out.println("Aluno não encontrado!");
+                            }
+                        }
+                    }
+
+
+                    break;
+
+                case 0:
+                    System.out.println("Finalizando Programa...");
+                    break;
+
                 default:
                     System.out.println("Favor selecionar uma opção válida!");
                     break;

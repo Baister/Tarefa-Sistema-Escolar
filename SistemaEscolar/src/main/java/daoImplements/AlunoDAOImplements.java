@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AlunoDAOImplements implements IAlunoDAO {
     @Override
@@ -52,4 +53,56 @@ public class AlunoDAOImplements implements IAlunoDAO {
     public void excluirAluno(Aluno aluno) {
 
     }
+    @Override
+    public Optional<Aluno> buscarPorId(int id){
+        String sql = "SELECT * FROM aluno WHERE id = ?";
+
+        try(Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+        if(rs.next()) {
+            Aluno aluno = new Aluno (
+                    rs.getInt("idAluno"),//Representa uma coluna da tabela de aluno, a ID
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getString("email"),
+                    rs.getDate("data_nascimento").toLocalDate(),
+                    rs.getString("telefone")
+            );
+            return Optional.of(aluno);
+        }
+
+        }catch (SQLException e){
+            System.err.println("Erro ao buscar aluno " + e.getMessage());
+        }
+        return Optional.empty();
+    }
+
+//    @Override
+//    public Aluno buscarAluno(int id){
+//        String sql = "SELECT * FROM aluno WHERE id = ?";
+//        try (Connection conn = sqlConn.getConnection()){
+//            PreparedStatement stmt = conn.prepareStatement(sql);
+//
+//            stmt.setInt(1,id);
+//            ResultSet rs = stmt.executeQuery();
+//
+//            if(rs.next()){
+//                Aluno aluno = new Aluno(rs.getInt("id"),//Representa uma coluna da tabela de aluno, a ID
+//                        rs.getString("nome"),
+//                        rs.getString("cpf"),
+//                        rs.getString("email"),
+//                        rs.getDate("data_nascimento").toLocalDate(),
+//                        rs.getString("telefone"));
+//                return aluno;
+//            }
+//
+//        }catch (SQLException e){
+//            System.err.print("Erro ao listar os alunos: " + e.getMessage());
+//        }
+//        return null;
+//    }
 }
