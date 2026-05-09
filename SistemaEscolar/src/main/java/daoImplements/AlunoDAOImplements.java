@@ -45,8 +45,31 @@ public class AlunoDAOImplements implements IAlunoDAO {
     }
 
     @Override
-    public void atualizarAluno(Aluno aluno) {
+    public Optional<Aluno> atualizarAluno(int id) {
+        String sql = "UPDATE aluno SET WHERE idAluno = ?";
 
+        try(Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()) {
+                Aluno aluno = new Aluno (
+                        rs.getInt("idAluno"),//Representa uma coluna da tabela de aluno, a ID
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getString("email"),
+                        rs.getDate("data_nascimento").toLocalDate(),
+                        rs.getString("telefone")
+                );
+                return Optional.of(aluno);
+            }
+
+        }catch (SQLException e){
+            System.err.println("Erro ao buscar aluno " + e.getMessage());
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -55,7 +78,7 @@ public class AlunoDAOImplements implements IAlunoDAO {
     }
     @Override
     public Optional<Aluno> buscarPorId(int id){
-        String sql = "SELECT * FROM aluno WHERE id = ?";
+        String sql = "SELECT * FROM aluno WHERE idAluno = ?";
 
         try(Connection conn = sqlConn.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);

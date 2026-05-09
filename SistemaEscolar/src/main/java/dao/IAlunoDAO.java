@@ -14,7 +14,7 @@ public interface IAlunoDAO {
     List<Aluno> listarTodosAlunos();
 
     //Update
-    void atualizarAluno(Aluno aluno);
+    Optional<Aluno> atualizarAluno(int id);
 
     //Delete
     void excluirAluno(Aluno aluno);

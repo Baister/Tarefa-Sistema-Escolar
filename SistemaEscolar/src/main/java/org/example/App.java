@@ -6,6 +6,7 @@ import database.sqlConn;
 import model.Aluno;
 
 import java.sql.SQLOutput;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class App
             System.out.println("2. Atualizar Aluno;");
             System.out.println("3. Excluir Aluno;");
             System.out.println("4. Listar Alunos;");
-            System.out.println("5. Buscar Aluno;");
+            System.out.println("5. Listar Aluno por id;");
             System.out.println("0. Sair do a programa.");
 
             opcao = sc.nextInt();
@@ -60,23 +61,18 @@ public class App
                     break;
 
                 case 5:
-                    System.out.println("Buscar Aluno");
+                    System.out.println("Listar Aluno por ID. Informe um ID para pesquisar: ");
+
                     System.out.print("Digite o ID aluno: ");
-                    int idBuscado = sc.nextInt();
+                    int idBusca = sc.nextInt();
 
-                    List<Aluno> todosAlunosDois = alunoDaoMethods.listarTodosAlunos();
-                    if(todosAlunosDois.isEmpty()){
-                        System.out.println("Nenhum aluno encontrado!");
+                    Optional<Aluno> alunoEncontrado = alunoDaoMethods.buscarPorId(idBusca);
+
+                    if (alunoEncontrado.isPresent()){
+                        System.out.println(alunoEncontrado); // toString();
                     }else{
-                        for(Aluno aluno : todosAlunosDois) {
-                            if(aluno.getId() == idBuscado){
-                                Aluno alunoBuscado = aluno;
-                            }else{
-                                System.out.println("Aluno não encontrado!");
-                            }
-                        }
+                        System.out.println("Nenhum aluno encontrado!");
                     }
-
 
                     break;
 
