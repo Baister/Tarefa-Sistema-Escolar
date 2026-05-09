@@ -38,7 +38,22 @@ public class App
 
             switch(opcao){
                 case 1:
+                    String novoNome, novoCpf, novoEmail,telefone;
+
                     System.out.println("Cadastro do aluno");
+                    System.out.println("Digite o nome: ");
+                    novoNome = sc.nextLine();
+                    sc.nextLine(); // Para limpar a memória de cache
+                    System.out.println("Digite o cpf: ");
+                    novoCpf = sc.nextLine();
+                    sc.nextLine();
+                    System.out.println("Digite o email: ");
+                    novoEmail = sc.nextLine();
+                    sc.nextLine();
+                    System.out.println("Digite o data nascimento: ");
+
+                    System.out.println("Telefone: ");
+
                     break;
                 case 2:
                     System.out.println("Atualizar aluno");

@@ -4,10 +4,7 @@ import dao.IAlunoDAO;
 import database.sqlConn;
 import model.Aluno;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +12,23 @@ import java.util.Optional;
 public class AlunoDAOImplements implements IAlunoDAO {
     @Override
     public void salvarAluno(Aluno aluno) {
+        String sql = "INSERT INTO aluno(nome, cpf, email, data_nascimento, telefone) VALUES(?,?,?,?,?)";
+        try (Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
 
+            stmt.setString(1, aluno.getNome());
+            stmt.setString(2, aluno.getCpf());
+            stmt.setString(3, aluno.getEmail());
+            stmt.setDate(4, Date.valueOf(aluno.getData_Nascimento()));
+            stmt.setString(5, aluno.getTelefone());
+            stmt.executeUpdate();
+            System.out.println("Criado com sucesso!");
+
+
+        }catch (SQLException e){
+            System.err.print("Erro aolistar os alunos: " + e.getMessage());
+        }
     }
 
     @Override
@@ -46,12 +59,12 @@ public class AlunoDAOImplements implements IAlunoDAO {
 
     @Override
     public Optional<Aluno> atualizarAluno(int id) {
-        String sql = "UPDATE aluno SET WHERE idAluno = ?";
+        String sql = "UPDATE aluno SET nome=?,cpf=?,email=? WHERE idAluno = ?";
 
         try(Connection conn = sqlConn.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setInt(1, id);
+            stmt.setInt(4, id);
             ResultSet rs = stmt.executeQuery();
 
             if(rs.next()) {
