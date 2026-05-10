@@ -82,7 +82,7 @@ public class Aluno {
     @Override
     public String toString() {
         return String.format(
-                "Aluno: id=%d - nome=%s - cpf%s - email=%s - nascimento=%s - telefone=%s",
+                "Aluno: id=%d - nome=%s - cpf=%s - email=%s - nascimento=%s - telefone=%s",
                 id, nome, cpf, email, data_Nascimento, telefone
         );
     }
