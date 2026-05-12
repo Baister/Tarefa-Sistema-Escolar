@@ -35,7 +35,7 @@ create table professor (
         -- DOS DADOS, IMPEDINDO A INSERÇÃO DE INFORMAÇÕES INVÁLIDAS
 );
 
--- 3 aluno
+-- 3 aluno, salvando pro commit, parte dois
 
 CREATE TABLE aluno(
 	idAluno INT AUTO_INCREMENT PRIMARY KEY,
