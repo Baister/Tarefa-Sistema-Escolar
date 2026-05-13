@@ -17,6 +17,7 @@ public class AlunoDAOImplements implements IAlunoDAO {
             PreparedStatement stmt = conn.prepareStatement(sql)){
            // int rs = stmt.executeUpdate(); // ERRO: executou ANTES DE SETAR os parâmetros e os ? Continuam vazios aqui
 
+
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getCpf());
             stmt.setString(3, aluno.getEmail());

@@ -26,3 +26,4 @@ INSERT INTO matricula (aluno_id, turma_id, situacao) VALUES
     (3, 2, 'ATIVA'),
     (4, 3, 'ATIVA'),
     (1, 3, 'ATIVA');
+    
