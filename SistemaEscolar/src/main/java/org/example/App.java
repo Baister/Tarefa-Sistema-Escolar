@@ -2,8 +2,10 @@ package org.example;
 
 import dao.IAlunoDAO;
 import daoImplements.AlunoDAOImplements;
+import daoImplements.TurmaDAOImplements;
 import database.sqlConn;
 import model.Aluno;
+import model.Turma;
 
 import java.sql.SQLOutput;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +24,7 @@ public class App
     {
         sqlConn.testeConnection();
         AlunoDAOImplements  alunoDaoMethods = new AlunoDAOImplements();
+        TurmaDAOImplements turmaDaoMethods = new TurmaDAOImplements();
         Scanner sc = new Scanner(System.in);
 
         int opcao;
@@ -32,7 +35,8 @@ public class App
             System.out.println("2. Atualizar Aluno;");
             System.out.println("3. Excluir Aluno;");
             System.out.println("4. Listar Alunos;");
-            System.out.println("5. Listar Aluno por id;");
+            System.out.println("5. Buscar por id;");
+            System.out.println("6. Listar turmas e alunos;");
             System.out.println("0. Sair do a programa.");
             System.out.print("Digite o que deseja fazer: ");
 
@@ -163,6 +167,37 @@ public class App
                     }else{
                         System.out.println("Nenhum aluno encontrado!");
                     }
+
+                    break;
+
+
+                case 6:
+                    System.out.println("Listar Turmas");
+
+                    List<Turma> todasTurmas = turmaDaoMethods.listarTodasTurmas();
+
+                    if(todasTurmas.isEmpty()){
+                        System.out.println("Nenhuma turma encontrada!");
+                    } else {
+                        for (Turma turma : todasTurmas){
+                            System.out.println(turma);
+                        }
+                    }
+
+                    System.out.println("Informe o id da turma para visualizar os alunos:");
+                    int idInformado = sc.nextInt();
+
+                    List<Aluno> alunosTurmaEncontrada = turmaDaoMethods.listarAlunosPorTurma(idInformado);
+
+                    if(alunosTurmaEncontrada.isEmpty()){
+                        System.out.println("Nenhum aluno encontrado nesta turma!");
+                    }else {
+                        System.out.println("Alunos matriculados");
+                        for (Aluno aluno : alunosTurmaEncontrada){
+                            System.out.println(aluno);
+                        }
+                    }
+
 
                     break;
 
